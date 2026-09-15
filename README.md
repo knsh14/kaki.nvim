@@ -91,6 +91,7 @@ require("kaki").setup({
 - [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
 - [lazy.nvim](https://github.com/folke/lazy.nvim)
 - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
+- [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) (`theme = "kaki"`)
 - [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
 - [nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua)
 - [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)
