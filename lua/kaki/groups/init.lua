@@ -7,6 +7,7 @@ local modules = {
   "kaki.groups.editor",
   "kaki.groups.syntax",
   "kaki.groups.treesitter",
+  "kaki.groups.lsp",
 
   "kaki.groups.languages.markdown",
   "kaki.groups.languages.python",
