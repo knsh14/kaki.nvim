@@ -5,6 +5,7 @@ local palette = require("kaki.palette")
 
 local modules = {
   "kaki.groups.editor",
+  "kaki.groups.syntax",
   "kaki.groups.treesitter",
 
   "kaki.groups.languages.markdown",

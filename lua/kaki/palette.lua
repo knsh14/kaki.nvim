@@ -15,4 +15,10 @@ return {
 
   -- System colors
   red = "#e86464",
+
+  -- Subtle backgrounds (accents blended into bg at ~15%, for diff and similar)
+  bg_green = "#2a2f29",
+  bg_red = "#362225",
+  bg_blue = "#232b36",
+  bg_yellow = "#353024",
 }
