@@ -60,6 +60,30 @@ Or directly via the Lua API:
 require("kaki").load()
 ```
 
+### Configuration
+
+Call `setup()` before (or after — it re-applies) `colorscheme kaki`. Defaults shown:
+
+```lua
+require("kaki").setup({
+  transparent = false, -- remove backgrounds so the terminal's shows through
+  italic = true,       -- set false to strip italics everywhere
+  overrides = nil,     -- table merged into the highlight groups, or
+                       -- function(groups, palette) for full control
+})
+```
+
+```lua
+-- Example: tone down comments and make headings underlined
+require("kaki").setup({
+  overrides = function(groups, palette)
+    groups.Comment = { fg = palette.border, italic = true }
+    groups["@markup.heading"] = { fg = palette.orange, bold = true, underline = true }
+    return groups
+  end,
+})
+```
+
 ## Supported plugins
 
 - Tree-sitter (with language-specific tuning for Python / C++ / Go / Rust / Lua / Bash / Markdown / JSON / YAML / TOML)

@@ -21,6 +21,43 @@ local function set_terminal_colors(p)
   vim.g.terminal_color_15 = p.fg
 end
 
+-- Groups whose background is dropped when transparent = true
+local transparent_groups = {
+  "Normal",
+  "NormalNC",
+  "SignColumn",
+  "TabLineFill",
+  "NvimTreeNormal",
+  "NeoTreeNormal",
+  "NeoTreeNormalNC",
+  "TelescopeNormal",
+  "TelescopeBorder",
+}
+
+local function apply_options(groups, config, palette)
+  if config.transparent then
+    for _, name in ipairs(transparent_groups) do
+      if groups[name] then
+        groups[name].bg = nil
+      end
+    end
+  end
+
+  if config.italic == false then
+    for _, definition in pairs(groups) do
+      definition.italic = nil
+    end
+  end
+
+  if type(config.overrides) == "function" then
+    groups = config.overrides(groups, palette) or groups
+  elseif type(config.overrides) == "table" then
+    groups = vim.tbl_deep_extend("force", groups, config.overrides)
+  end
+
+  return groups
+end
+
 M.load = function()
   vim.cmd("highlight clear")
   if vim.fn.exists("syntax_on") == 1 then
@@ -30,15 +67,24 @@ M.load = function()
   vim.o.termguicolors = true
   vim.g.colors_name = "kaki"
 
-  set_terminal_colors(require("kaki.palette"))
+  local palette = require("kaki.palette")
+  set_terminal_colors(palette)
 
-  local groups = require("kaki.groups")
-  for group, config in pairs(groups) do
-    vim.api.nvim_set_hl(0, group, config)
+  -- require() caches the shared table, so copy before applying options
+  local groups = vim.deepcopy(require("kaki.groups"))
+  groups = apply_options(groups, require("kaki.config").options, palette)
+
+  for group, definition in pairs(groups) do
+    vim.api.nvim_set_hl(0, group, definition)
   end
 end
 
--- setup() is an alias for load(), kept for plugin manager conventions
-M.setup = M.load
+M.setup = function(opts)
+  require("kaki.config").set(opts)
+  -- Re-apply immediately when kaki is already the active colorscheme
+  if vim.g.colors_name == "kaki" then
+    M.load()
+  end
+end
 
 return M
