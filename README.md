@@ -2,6 +2,8 @@
 
 A dark colorscheme for Neovim named after the kaki (柿, Japanese persimmon), built around a vivid orange accent.
 
+![kaki.nvim highlighting a Lua file](assets/screenshot-lua.png)
+
 - **orange** `#f08c3a` — a vivid orange like the persimmon fruit (main accent)
 - **green** `#9dbf7b` — a calm, yellow-tinged green like persimmon leaves
 - **yellow** `#e5c05e` — a restrained mustard yellow
